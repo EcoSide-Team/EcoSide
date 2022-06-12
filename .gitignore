@@ -1,0 +1,9 @@
+node_modules/
+build/
+coverage/
+cypress/videos/
+cypress/screenshots/
+.turbo/
+logs/
+*.log
+*.env
