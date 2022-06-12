@@ -1,3 +1,6 @@
 {
-    "extends": ["../../.eslintrc", "react-app"]
+    "extends": ["../../.eslintrc", "react-app"],
+    "rules": {
+        "import/no-anonymous-default-export": "off"
+    }
 }
