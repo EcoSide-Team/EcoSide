@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { AppService, AppController } from '.';
+import { AppController, AppService } from '.';
 
 @Module({
     imports: [],
