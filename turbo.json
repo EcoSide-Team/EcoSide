@@ -1,0 +1,20 @@
+{
+    "pipeline": {
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": ["build/**"]
+        },
+        "build:watch": {
+            "outputs": ["build/**"]
+        },
+        "lint": {
+            "outputs": []
+        },
+        "test": {
+            "outputs": []
+        },
+        "dev": {
+            "cache": false
+        }
+    }
+}
