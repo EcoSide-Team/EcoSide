@@ -14,7 +14,7 @@
         "build:watch": "turbo run build:watch",
         "test": "turbo run test",
         "lint": "turbo run lint",
-        "clean": "rimraf **/node_modules/ **/build/ **/coverage/ **/cypress/videos/ **/cypress/screenshots/ **/.turbo/ **/logs/"
+        "clean": "rimraf **/node_modules/ **/build/ **/coverage/ **/cypress/videos/ **/cypress/screenshots/ **/.turbo/ **/logs/ **/*.log"
     },
     "devDependencies": {
         "@types/node": "^17.0.42",
