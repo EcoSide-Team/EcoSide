@@ -1,0 +1,147 @@
+version: '3.7'
+
+services:
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        ports:
+            - 80:80
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+        env_file:
+            - .docker.env
+        networks:
+            - api
+            - client
+        depends_on:
+            - api
+            - client
+
+    client:
+        container_name: client
+        image: node:lts-alpine
+        working_dir: /app/apps/client
+        command: yarn dev --host
+        ports:
+            - 3000:3000 # vite hmr
+        volumes:
+            - ./:/app
+        env_file:
+            - ./apps/client/.env
+        networks:
+            - client
+        depends_on:
+            - api
+
+    api:
+        container_name: api
+        image: node:lts-alpine
+        working_dir: /app/apps/api
+        command: yarn dev
+        ports:
+            - 9229:9229
+        volumes:
+            - ./:/app
+        env_file:
+            - ./apps/api/.env
+        networks:
+            - api
+            - redis
+            - postgres
+            - minio
+        depends_on:
+            - redis
+            - postgres
+            - minio
+
+    redis:
+        container_name: redis
+        image: redis:latest
+        ports:
+            - 6379:6379
+        volumes:
+            - redis-data:/data
+        env_file:
+            - .docker.env
+        networks:
+            - redis
+
+    redis-commander:
+        container_name: redis-commander
+        image: rediscommander/redis-commander:latest
+        ports:
+            - 8081:8081
+        env_file:
+            - .docker.env
+        networks:
+            - redis
+        depends_on:
+            - redis
+
+    postgres:
+        container_name: postgres
+        image: postgres:latest
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        env_file:
+            - .docker.env
+        networks:
+            - postgres
+
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4:latest
+        ports:
+            - 8080:80
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        env_file:
+            - .docker.env
+        networks:
+            - postgres
+        depends_on:
+            - postgres
+
+    minio:
+        container_name: minio
+        image: minio/minio:latest
+        command: server --console-address ":9001" /data
+        ports:
+            - 9000:9000
+            - 9001:9001
+        volumes:
+            - minio-data:/data
+        env_file:
+            - .docker.env
+        networks:
+            - minio
+        healthcheck:
+            test:
+                ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+            interval: 30s
+            timeout: 20s
+            retries: 3
+
+volumes:
+    redis-data:
+        driver: local
+    postgres-data:
+        driver: local
+    pgadmin-data:
+        driver: local
+    minio-data:
+        driver: local
+
+networks:
+    client:
+        driver: bridge
+    api:
+        driver: bridge
+    redis:
+        driver: bridge
+    postgres:
+        driver: bridge
+    minio:
+        driver: bridge

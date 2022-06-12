@@ -1,0 +1,106 @@
+version: '3.7'
+
+services:
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        ports:
+            - 80:80
+        volumes:
+            - ./nginx.prod.conf:/etc/nginx/nginx.conf
+        env_file:
+            - .docker.env
+        networks:
+            - api
+            - client
+        depends_on:
+            - api
+            - client
+
+    client:
+        container_name: client
+        build:
+            dockerfile: ./apps/client/Dockerfile
+            context: .
+        env_file:
+            - ./apps/client/.env
+        networks:
+            - client
+        depends_on:
+            - api
+
+    api:
+        container_name: api
+        build:
+            dockerfile: ./apps/api/Dockerfile
+            context: .
+        env_file:
+            - ./apps/api/.env
+        networks:
+            - api
+            - redis
+            - postgres
+            - minio
+        depends_on:
+            - redis
+            - postgres
+            - minio
+
+    redis:
+        container_name: redis
+        image: redis:latest
+        volumes:
+            - redis-data:/data
+        env_file:
+            - .docker.env
+        networks:
+            - redis
+
+    postgres:
+        container_name: postgres
+        image: postgres:latest
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        env_file:
+            - .docker.env
+        networks:
+            - postgres
+
+    minio:
+        container_name: minio
+        image: minio/minio:latest
+        command: server /data
+        ports:
+            - 9000:9000
+        volumes:
+            - minio-data:/data
+        env_file:
+            - .docker.env
+        networks:
+            - minio
+        healthcheck:
+            test:
+                ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+            interval: 30s
+            timeout: 20s
+            retries: 3
+
+volumes:
+    redis-data:
+        driver: local
+    postgres-data:
+        driver: local
+    minio-data:
+        driver: local
+
+networks:
+    client:
+        driver: bridge
+    api:
+        driver: bridge
+    redis:
+        driver: bridge
+    postgres:
+        driver: bridge
+    minio:
+        driver: bridge
