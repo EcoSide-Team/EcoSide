@@ -9,6 +9,11 @@ export default {
         // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
         layout: 'fullscreen',
     },
+    argTypes: {
+        onLogin: { type: 'function' },
+        onLogout: { type: 'function' },
+        onCreateAccount: { type: 'function' },
+    },
 } as ComponentMeta<typeof Header>;
 
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;

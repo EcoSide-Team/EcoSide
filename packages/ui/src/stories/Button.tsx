@@ -8,13 +8,13 @@ import './button.css';
 export const Button = ({
     primary = true,
     backgroundColor,
-    size,
+    size = 'medium',
     label,
     ...props
 }: {
     primary?: boolean;
     backgroundColor?: string;
-    size: string;
+    size?: 'large' | 'medium' | 'small';
     label: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>) => {
     const mode = primary
