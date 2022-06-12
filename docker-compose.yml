@@ -6,16 +6,19 @@ services:
         image: nginx:latest
         ports:
             - 80:80
+            - 6006:6006
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf
         env_file:
             - .docker.env
         networks:
-            - api
             - client
+            - storybook
+            - api
         depends_on:
-            - api
             - client
+            - storybook
+            - api
 
     client:
         container_name: client
@@ -32,6 +35,16 @@ services:
             - client
         depends_on:
             - api
+
+    storybook:
+        container_name: storybook
+        image: node:lts-alpine
+        working_dir: /app/packages/ui
+        command: yarn storybook
+        volumes:
+            - ./:/app
+        networks:
+            - storybook
 
     api:
         container_name: api
@@ -136,6 +149,8 @@ volumes:
 
 networks:
     client:
+        driver: bridge
+    storybook:
         driver: bridge
     api:
         driver: bridge

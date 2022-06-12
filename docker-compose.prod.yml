@@ -6,16 +6,19 @@ services:
         image: nginx:latest
         ports:
             - 80:80
+            - 6006:6006
         volumes:
             - ./nginx.prod.conf:/etc/nginx/nginx.conf
         env_file:
             - .docker.env
         networks:
-            - api
             - client
+            - storybook
+            - api
         depends_on:
-            - api
             - client
+            - storybook
+            - api
 
     client:
         container_name: client
@@ -28,6 +31,14 @@ services:
             - client
         depends_on:
             - api
+
+    storybook:
+        container_name: storybook
+        build:
+            dockerfile: ./packages/ui/Dockerfile
+            context: .
+        networks:
+            - storybook
 
     api:
         container_name: api
@@ -95,6 +106,8 @@ volumes:
 
 networks:
     client:
+        driver: bridge
+    storybook:
         driver: bridge
     api:
         driver: bridge
