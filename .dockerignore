@@ -1,0 +1,10 @@
+**/node_modules/
+**/build/
+**/coverage/
+**/cypress/videos/
+**/cypress/screenshots/
+**/storybook-static/
+**/.turbo/
+**/logs/
+**/*.log
+**/Dockerfile
