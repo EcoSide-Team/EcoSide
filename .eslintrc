@@ -1,0 +1,20 @@
+{
+    "root": true,
+    "plugins": ["simple-import-sort", "prettier"],
+    "extends": ["plugin:prettier/recommended"],
+    "rules": {
+        "prettier/prettier": "error",
+        "simple-import-sort/imports": [
+            "error",
+            {
+                "groups": [
+                    ["^\u0000", "\\w+"],
+                    ["^@ecoside/\\w+", "^\\..*"],
+                    ["^\u0000\\..*"]
+                ]
+            }
+        ],
+        "simple-import-sort/exports": "off"
+    },
+    "ignorePatterns": ["node_modules", "build", "coverage", ".turbo", "logs"]
+}
