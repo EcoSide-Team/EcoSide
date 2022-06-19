@@ -29,8 +29,6 @@ services:
             - 3000:3000 # vite hmr
         volumes:
             - ./:/app
-        env_file:
-            - ./apps/client/.env
         networks:
             - client
         depends_on:
@@ -50,13 +48,11 @@ services:
         container_name: api
         image: node:lts-alpine
         working_dir: /app/apps/api
-        command: yarn dev
+        command: yarn dev --debug 0.0.0.0:9229
         ports:
             - 9229:9229
         volumes:
             - ./:/app
-        env_file:
-            - ./apps/api/.env
         networks:
             - api
             - redis
