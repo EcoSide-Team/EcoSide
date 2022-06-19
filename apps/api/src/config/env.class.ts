@@ -1,5 +1,4 @@
-import { Type } from 'class-transformer';
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { IsBooleanString, IsEnum, IsNumber, IsString } from 'class-validator';
 
 export enum NodeEnv {
     DEVELOPMENT = 'development',
@@ -13,9 +12,8 @@ export class Env {
 
     // APP
 
-    @Type(() => Number)
     @IsNumber()
-    PORT = 4000;
+    PORT: number;
 
     @IsString()
     BASE_PATH = '/';
@@ -27,4 +25,12 @@ export class Env {
 
     @IsString()
     CLIENT_CORS_WILDCARD_URL: string;
+
+    // POSTGRES
+
+    @IsString()
+    DATABASE_URL: string;
+
+    @IsBooleanString()
+    DATABASE_SSL: string;
 }
