@@ -7,12 +7,18 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app';
+import { ConfigService } from './config';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    const env = app.get(ConfigService);
 
     app.enableCors({
-        origin: ['http://localhost:3000'],
+        origin: [
+            env.CLIENT_URL,
+            new RegExp(env.CLIENT_CORS_WILDCARD_URL),
+            'http://localhost',
+        ],
         credentials: true,
     });
 
@@ -23,11 +29,15 @@ async function bootstrap() {
         new ClassSerializerInterceptor(app.get(Reflector)),
     );
 
+    // SWAGGER
     const config = new DocumentBuilder()
         .setTitle('API Docs')
+        .addServer(env.BASE_PATH)
         .addCookieAuth()
         .build();
+
     const document = SwaggerModule.createDocument(app, config);
+
     SwaggerModule.setup('/docs', app, document, {
         swaggerOptions: {
             persistAuthorization: true,
