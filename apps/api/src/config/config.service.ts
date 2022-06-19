@@ -20,8 +20,16 @@ export class ConfigService {
         return this.env.get<number>('PORT');
     }
 
+    get BASE_PATH() {
+        return this.env.get<string>('BASE_PATH');
+    }
+
     get CLIENT_URL() {
         return this.env.get<string>('CLIENT_URL');
+    }
+
+    get CLIENT_CORS_WILDCARD_URL() {
+        return this.env.get<string>('CLIENT_CORS_WILDCARD_URL');
     }
 
     databaseCredentials(): TypeOrmModuleOptions {
