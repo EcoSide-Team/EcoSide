@@ -17,8 +17,14 @@ export class Env {
     @IsNumber()
     PORT = 4000;
 
+    @IsString()
+    BASE_PATH = '/';
+
     // CORS
 
     @IsString()
     CLIENT_URL: string;
+
+    @IsString()
+    CLIENT_CORS_WILDCARD_URL: string;
 }
