@@ -33,4 +33,27 @@ export class Env {
 
     @IsBooleanString()
     DATABASE_SSL: string;
+
+    // SMTP
+
+    @IsBooleanString()
+    EMAIL_ENABLE: string;
+
+    @IsString()
+    SMTP_HOST: string;
+
+    @IsNumber()
+    SMTP_PORT: number;
+
+    @IsBooleanString()
+    SMTP_SECURE: string;
+
+    @IsString()
+    SMTP_USERNAME: string;
+
+    @IsString()
+    SMTP_PASSWORD: string;
+
+    @IsString()
+    EMAIL_FROM: string;
 }
