@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService as NestConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { MailerOptions } from '@nestjs-modules/mailer';
 
 import { Env, NodeEnv } from '.';
 
@@ -40,6 +41,24 @@ export class ConfigService {
                 this.get<string>('DATABASE_SSL') === 'true'
                     ? { requestCert: true, rejectUnauthorized: false }
                     : undefined,
+        };
+    }
+
+    mailerOptions(): MailerOptions {
+        return {
+            transport: {
+                host: this.env.get('SMTP_HOST'),
+                port: this.env.get('SMTP_PORT'),
+                secure: this.env.get('SMTP_SECURE') === 'true',
+                auth: {
+                    user: this.env.get('SMTP_USERNAME'),
+                    pass: this.env.get('SMTP_PASSWORD'),
+                },
+                logger: true,
+            },
+            defaults: {
+                from: this.env.get('EMAIL_FROM'),
+            },
         };
     }
 }
