@@ -7,6 +7,7 @@ import {
     IsString,
     Length,
     MaxDate,
+    MinDate,
 } from 'class-validator';
 
 import { Match, Time } from '@ecoside/utils';
@@ -40,5 +41,6 @@ export class RegisterDto {
     @Type(() => Date)
     @IsDate()
     @MaxDate(new Date(Date.now() - 16 * Time.YEAR))
+    @MinDate(new Date(Date.now() - 100 * Time.YEAR))
     birthdate: Date;
 }
