@@ -7,8 +7,8 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import { ThemeToggler } from './components/index';
-import { DarkTheme, LightTheme } from './themes/Themes';
+import { ThemeToggler } from '../components';
+import { DarkTheme, LightTheme } from '../themes';
 
 export const App = () => {
     const [theme, setTheme] = useState<String | null>(
