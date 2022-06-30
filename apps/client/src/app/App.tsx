@@ -1,4 +1,3 @@
-import BottomNavbar from './components/BottomNavbar/BottomNavbar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -8,7 +7,6 @@ import lightTheme from './themes/lightTheme';
 import darkTheme from './themes/darkTheme';
 import ThemeToggler from './components/ThemeToggler/ThemeToggler';
 import { useState } from 'react';
-import { ChildProcessWithoutNullStreams } from 'child_process';
 
 export const App = () => {
     const [theme, setTheme] = useState<String | null>(localStorage.getItem('theme'));
