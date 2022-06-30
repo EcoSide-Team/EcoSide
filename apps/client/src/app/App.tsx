@@ -6,10 +6,15 @@ import BottomNavbar from './components/BottomNavbar/BottomNavbar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import lightTheme from './themes/lightTheme';
+import darkTheme from './themes/darkTheme';
 
 export const App = () => {
     return (
-        <>
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
             <BottomNavbar></BottomNavbar>
             <Stack spacing={2} direction='row'>
                 <Button variant='text'>Text</Button>
@@ -22,6 +27,6 @@ export const App = () => {
                 <Checkbox disabled />
                 <Checkbox disabled checked />
             </div>
-        </>
+        </ThemeProvider>
     );
 };
