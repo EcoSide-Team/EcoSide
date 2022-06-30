@@ -15,7 +15,7 @@ import { AppController, AppService } from '.';
         DatabaseModule,
         EmailModule,
         UserModule,
-        AuthModule
+        AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
