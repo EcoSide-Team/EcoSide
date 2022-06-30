@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { User } from '@ecoside/database';
+import { Token, User } from '@ecoside/database';
 import { ConfigModule, ConfigService, NodeEnv } from '../config';
 
 @Module({
@@ -13,7 +13,7 @@ import { ConfigModule, ConfigService, NodeEnv } from '../config';
                 ...configService.databaseCredentials(),
                 // logging: configService.NODE_ENV === NodeEnv.DEVELOPMENT,
                 synchronize: configService.NODE_ENV === NodeEnv.DEVELOPMENT,
-                entities: [User],
+                entities: [User, Token],
             }),
         }),
     ],
