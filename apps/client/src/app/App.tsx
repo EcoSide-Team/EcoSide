@@ -1,7 +1,3 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import BottomNavbar from './components/BottomNavbar/BottomNavbar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -10,12 +6,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import lightTheme from './themes/lightTheme';
 import darkTheme from './themes/darkTheme';
+import ThemeToggler from './components/ThemeToggler/ThemeToggler';
+import { useState } from 'react';
+import { ChildProcessWithoutNullStreams } from 'child_process';
 
 export const App = () => {
+    const [theme, setTheme] = useState<String | null>(localStorage.getItem('theme'));
+
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={theme == 'dark' ? darkTheme : lightTheme}>
             <CssBaseline />
-            <BottomNavbar></BottomNavbar>
             <Stack spacing={2} direction='row'>
                 <Button variant='text'>Text</Button>
                 <Button variant='contained'>Contained</Button>
@@ -27,6 +27,7 @@ export const App = () => {
                 <Checkbox disabled />
                 <Checkbox disabled checked />
             </div>
+            <ThemeToggler changeVal={setTheme}></ThemeToggler>
         </ThemeProvider>
     );
 };
