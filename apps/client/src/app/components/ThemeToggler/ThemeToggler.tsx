@@ -4,15 +4,16 @@ interface TogglerProps {
     changeVal: (a: String) => void;
 }
 
-export default function ThemeToggler({ changeVal }: TogglerProps) {
-    const changeto = localStorage.getItem('theme') == 'dark' ? 'light' : 'dark';
+export const ThemeToggler = ({ changeVal }: TogglerProps) => {
+    const changeto =
+        localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
     return (
         <Switch
-            checked={changeto == 'light'}
+            checked={changeto === 'light'}
             onChange={() => {
                 changeVal(changeto);
                 localStorage.setItem('theme', changeto);
             }}
         />
     );
-}
+};

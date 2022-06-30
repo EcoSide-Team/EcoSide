@@ -1,18 +1,22 @@
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import lightTheme from './themes/lightTheme';
-import darkTheme from './themes/darkTheme';
-import ThemeToggler from './components/ThemeToggler/ThemeToggler';
+import {
+    Button,
+    Checkbox,
+    CssBaseline,
+    Stack,
+    ThemeProvider,
+} from '@mui/material';
 import { useState } from 'react';
 
+import { ThemeToggler } from './components/index';
+import { DarkTheme, LightTheme } from './themes/Themes';
+
 export const App = () => {
-    const [theme, setTheme] = useState<String | null>(localStorage.getItem('theme'));
+    const [theme, setTheme] = useState<String | null>(
+        localStorage.getItem('theme'),
+    );
 
     return (
-        <ThemeProvider theme={theme == 'dark' ? darkTheme : lightTheme}>
+        <ThemeProvider theme={theme === 'dark' ? DarkTheme : LightTheme}>
             <CssBaseline />
             <Stack spacing={2} direction='row'>
                 <Button variant='text'>Text</Button>
