@@ -2,6 +2,7 @@ import {
     Body,
     Controller,
     HttpCode,
+    InternalServerErrorException,
     Post,
     Req,
     UseGuards,
@@ -63,7 +64,7 @@ export class AuthController {
     @ApiOkResponse({ description: 'Successfully logged out' })
     logout(@Req() request: Request) {
         request.logout((err) => {
-            throw err;
+            if (err) throw new InternalServerErrorException();
         });
     }
 
