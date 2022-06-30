@@ -2,32 +2,26 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import ProTip from './ProTip';
+import BottomNavbar from './components/BottomNavbar/BottomNavbar';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
 
 export const App = () => {
     return (
-        <Container maxWidth='sm'>
-            <Box sx={{ my: 4 }}>
-                <Typography variant='h4' component='h1' gutterBottom>
-                    Create React App example
-                </Typography>
-                <ProTip />
-                <Copyright />
-            </Box>
-        </Container>
+        <>
+            <BottomNavbar></BottomNavbar>
+            <Stack spacing={2} direction='row'>
+                <Button variant='text'>Text</Button>
+                <Button variant='contained'>Contained</Button>
+                <Button variant='outlined'>Outlined</Button>
+            </Stack>
+            <div>
+                <Checkbox defaultChecked />
+                <Checkbox />
+                <Checkbox disabled />
+                <Checkbox disabled checked />
+            </div>
+        </>
     );
 };
-
-function Copyright() {
-    return (
-        <Typography variant='body2' color='text.secondary' align='center'>
-            {'Copyright © '}
-            <Link color='inherit' href='https://mui.com/'>
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
