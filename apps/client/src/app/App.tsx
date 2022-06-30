@@ -1,50 +1,33 @@
-import { useState } from 'react';
-
-import { Button } from '@ecoside/ui';
-import logo from '../assets/logo.svg';
-
-import './App.css';
+import * as React from 'react';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import ProTip from './ProTip';
 
 export const App = () => {
-    const [count, setCount] = useState(0);
-
     return (
-        <div className='App'>
-            <header className='App-header'>
-                <img src={logo} className='App-logo' alt='logo' />
-                <p>Hello Vite + React!</p>
-                <p>
-                    <button
-                        type='button'
-                        onClick={() => setCount((count) => count + 1)}
-                    >
-                        count is: {count}
-                    </button>
-                </p>
-                <Button text={String(count)} />
-                <p>
-                    Edit <code>App.tsx</code> and save to test HMR updates.
-                </p>
-                <p>
-                    <a
-                        className='App-link'
-                        href='https://reactjs.org'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
-                        Learn React
-                    </a>
-                    {' | '}
-                    <a
-                        className='App-link'
-                        href='https://vitejs.dev/guide/features.html'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
-                        Vite Docs
-                    </a>
-                </p>
-            </header>
-        </div>
+        <Container maxWidth='sm'>
+            <Box sx={{ my: 4 }}>
+                <Typography variant='h4' component='h1' gutterBottom>
+                    Create React App example
+                </Typography>
+                <ProTip />
+                <Copyright />
+            </Box>
+        </Container>
     );
 };
+
+function Copyright() {
+    return (
+        <Typography variant='body2' color='text.secondary' align='center'>
+            {'Copyright © '}
+            <Link color='inherit' href='https://mui.com/'>
+                Your Website
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
