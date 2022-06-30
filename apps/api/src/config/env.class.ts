@@ -26,6 +26,11 @@ export class Env {
     @IsString()
     CLIENT_CORS_WILDCARD_URL: string;
 
+    // REDIS
+
+    @IsString()
+    REDIS_URL: string;
+
     // POSTGRES
 
     @IsString()

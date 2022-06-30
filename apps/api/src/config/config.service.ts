@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService as NestConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { MailerOptions } from '@nestjs-modules/mailer';
+import { RedisOptions } from 'ioredis';
 
 import { Env, NodeEnv } from '.';
 
@@ -31,6 +32,18 @@ export class ConfigService {
 
     get CLIENT_CORS_WILDCARD_URL() {
         return this.env.get<string>('CLIENT_CORS_WILDCARD_URL');
+    }
+
+    get REDIS_URL() {
+        return this.env.get<string>('REDIS_URL');
+    }
+
+    redisOptions(): RedisOptions {
+        return {
+            tls: this.REDIS_URL.startsWith('rediss://')
+                ? { requestCert: true, rejectUnauthorized: false }
+                : undefined,
+        };
     }
 
     databaseCredentials(): TypeOrmModuleOptions {
