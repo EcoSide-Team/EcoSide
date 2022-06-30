@@ -17,6 +17,11 @@ export class RegisterDto {
     @IsEmail()
     email: string;
 
+    @ApiProperty({ example: 'maciej.opalinski' })
+    @IsString()
+    @Length(5, 64)
+    username: string;
+
     @ApiProperty({ example: 'admin123' })
     @IsString()
     @Length(8)
