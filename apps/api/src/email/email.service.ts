@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ISendMailOptions, MailerService } from '@nestjs-modules/mailer';
-import { randomBytes } from 'crypto';
 
+import { Token, User } from '@ecoside/database';
 import { ConfigService } from '../config';
 
 @Injectable()
@@ -17,18 +17,34 @@ export class EmailService {
         return this.mailerService.sendMail(sendMailOptions);
     }
 
-    confirmAccount(username: string) {
-        const url = `${this.config.CLIENT_URL}/activate/${randomBytes(
-            64,
-        ).toString('base64url')}`;
+    confirmAccount(user: User, token: Token) {
+        const url = `${
+            this.config.CLIENT_URL
+        }/activate/${token.getURIEncodedToken()}`;
 
         return this.sendMail({
-            to: username,
+            to: user.email,
             subject: 'Welcome to EcoSide',
             template: 'confirm-account',
             context: {
-                username,
+                username: user.first_name,
                 confirm_url: url,
+            },
+        });
+    }
+
+    resetPassword(user: User, token: Token) {
+        const url = `${
+            this.config.CLIENT_URL
+        }/reset-password/${token.getURIEncodedToken()}`;
+
+        return this.sendMail({
+            to: user.email,
+            subject: 'Reset your EcoSide account password',
+            template: 'reset-password',
+            context: {
+                name: user.first_name,
+                reset_url: url,
             },
         });
     }
