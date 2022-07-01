@@ -9,10 +9,17 @@ export default defineConfig({
         outDir: 'build',
         lib: {
             name: '@ecoside/ui',
-            entry: './src/index.tsx',
+            entry: './src/index.ts',
         },
         rollupOptions: {
-            external: ['react', 'react-dom'],
+            external: [
+                '@emotion/react',
+                '@emotion/styled',
+                '@mui/icons-material',
+                '@mui/material',
+                'react',
+                'react-dom',
+            ],
             output: {
                 globals: {
                     react: 'React',
