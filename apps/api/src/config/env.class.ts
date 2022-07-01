@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsBooleanString, IsEnum, IsNumber, IsString } from 'class-validator';
 
 export enum NodeEnv {
@@ -12,8 +13,9 @@ export class Env {
 
     // APP
 
+    @Type(() => Number)
     @IsNumber()
-    PORT: number;
+    PORT = 4000;
 
     @IsString()
     BASE_PATH = '/';
@@ -47,6 +49,7 @@ export class Env {
     @IsString()
     SMTP_HOST: string;
 
+    @Type(() => Number)
     @IsNumber()
     SMTP_PORT: number;
 
