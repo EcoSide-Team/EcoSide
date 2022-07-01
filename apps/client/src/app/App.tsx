@@ -7,16 +7,13 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import { ThemeToggler } from '../components';
-import { DarkTheme, LightTheme } from '../themes';
+import { DarkTheme, LightTheme, Theme, ThemeSwitcher } from '@ecoside/ui';
 
 export const App = () => {
-    const [theme, setTheme] = useState<String | null>(
-        localStorage.getItem('theme'),
-    );
+    const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
     return (
-        <ThemeProvider theme={theme === 'dark' ? DarkTheme : LightTheme}>
+        <ThemeProvider theme={theme === Theme.LIGHT ? LightTheme : DarkTheme}>
             <CssBaseline />
             <Stack spacing={2} direction='row'>
                 <Button variant='text'>Text</Button>
@@ -24,12 +21,12 @@ export const App = () => {
                 <Button variant='outlined'>Outlined</Button>
             </Stack>
             <div>
-                <Checkbox defaultChecked />
+                <Checkbox checked />
                 <Checkbox />
                 <Checkbox disabled />
                 <Checkbox disabled checked />
             </div>
-            <ThemeToggler changeVal={setTheme}></ThemeToggler>
+            <ThemeSwitcher onThemeChange={setTheme} />
         </ThemeProvider>
     );
 };
