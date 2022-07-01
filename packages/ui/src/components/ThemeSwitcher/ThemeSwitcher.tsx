@@ -5,18 +5,20 @@ export enum Theme {
     LIGHT = 'light',
 }
 
-interface ThemeSwitcherProps {
+export interface ThemeSwitcherProps {
     onThemeChange: (a: Theme) => void;
 }
 
 export const ThemeSwitcher = ({ onThemeChange }: ThemeSwitcherProps) => {
-    const new_theme =
-        localStorage.getItem('theme') === Theme.DARK ? Theme.LIGHT : Theme.DARK;
+    const theme = localStorage.getItem('theme');
 
     return (
         <Switch
-            checked={new_theme === Theme.LIGHT}
+            checked={theme === Theme.LIGHT}
             onChange={() => {
+                const new_theme =
+                    theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+
                 onThemeChange(new_theme);
                 localStorage.setItem('theme', new_theme);
             }}
