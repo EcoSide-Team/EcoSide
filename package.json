@@ -12,7 +12,7 @@
         "dev": "turbo run dev",
         "build": "turbo run build",
         "build:watch": "turbo run build:watch",
-        "heroku-postbuild": "turbo run build --scope @ecoside/api",
+        "heroku-postbuild": "turbo run build --scope $TARGET_PACKAGE",
         "test": "turbo run test",
         "lint": "turbo run lint",
         "clean": "rimraf **/node_modules/ **/build/ **/coverage/ **/cypress/videos/ **/cypress/screenshots/ **/.turbo/ **/logs/ **/*.log"
