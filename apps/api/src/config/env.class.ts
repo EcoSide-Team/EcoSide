@@ -13,7 +13,7 @@ export class Env {
     // APP
 
     @IsNumber()
-    PORT: number;
+    PORT = 4000;
 
     @IsString()
     BASE_PATH = '/';
