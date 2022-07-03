@@ -34,6 +34,10 @@ export class ConfigService {
         return this.env.get<string>('CLIENT_CORS_WILDCARD_URL');
     }
 
+    get COOKIE_SECRET() {
+        return this.env.get<string>('COOKIE_SECRET');
+    }
+
     get REDIS_URL() {
         return this.env.get<string>('REDIS_URL');
     }

@@ -1,5 +1,12 @@
 import { Type } from 'class-transformer';
-import { IsBooleanString, IsEnum, IsNumber, IsString } from 'class-validator';
+import {
+    IsBooleanString,
+    IsEnum,
+    IsNumber,
+    IsString,
+    MinLength,
+} from 'class-validator';
+import { randomBytes } from 'crypto';
 
 export enum NodeEnv {
     DEVELOPMENT = 'development',
@@ -27,6 +34,12 @@ export class Env {
 
     @IsString()
     CLIENT_CORS_WILDCARD_URL: string;
+
+    // SESSION
+
+    @IsString()
+    @MinLength(32)
+    COOKIE_SECRET: string = randomBytes(64).toString('base64url');
 
     // REDIS
 
