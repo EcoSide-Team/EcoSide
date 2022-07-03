@@ -1,50 +1,32 @@
+import {
+    Button,
+    Checkbox,
+    CssBaseline,
+    Stack,
+    ThemeProvider,
+} from '@mui/material';
 import { useState } from 'react';
 
-import { Button } from '@ecoside/ui';
-import logo from '../assets/logo.svg';
-
-import './App.css';
+import { DarkTheme, LightTheme, Theme, ThemeSwitcher } from '@ecoside/ui';
 
 export const App = () => {
-    const [count, setCount] = useState(0);
+    const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
     return (
-        <div className='App'>
-            <header className='App-header'>
-                <img src={logo} className='App-logo' alt='logo' />
-                <p>Hello Vite + React!</p>
-                <p>
-                    <button
-                        type='button'
-                        onClick={() => setCount((count) => count + 1)}
-                    >
-                        count is: {count}
-                    </button>
-                </p>
-                <Button text={String(count)} />
-                <p>
-                    Edit <code>App.tsx</code> and save to test HMR updates.
-                </p>
-                <p>
-                    <a
-                        className='App-link'
-                        href='https://reactjs.org'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
-                        Learn React
-                    </a>
-                    {' | '}
-                    <a
-                        className='App-link'
-                        href='https://vitejs.dev/guide/features.html'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
-                        Vite Docs
-                    </a>
-                </p>
-            </header>
-        </div>
+        <ThemeProvider theme={theme === Theme.LIGHT ? LightTheme : DarkTheme}>
+            <CssBaseline />
+            <Stack spacing={2} direction='row'>
+                <Button variant='text'>Text</Button>
+                <Button variant='contained'>Contained</Button>
+                <Button variant='outlined'>Outlined</Button>
+            </Stack>
+            <div>
+                <Checkbox checked />
+                <Checkbox />
+                <Checkbox disabled />
+                <Checkbox disabled checked />
+            </div>
+            <ThemeSwitcher onThemeChange={setTheme} />
+        </ThemeProvider>
     );
 };
