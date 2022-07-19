@@ -7,8 +7,13 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import { DarkTheme, LightTheme, Theme, ThemeSwitcher } from '@ecoside/ui';
-import { Navbar } from '../components';
+import {
+    DarkTheme,
+    LightTheme,
+    Navbar,
+    Theme,
+    ThemeSwitcher,
+} from '@ecoside/ui';
 
 export const App = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));

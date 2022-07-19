@@ -15,7 +15,7 @@ import {
 import * as React from 'react';
 
 import Logo from '../../assets/favicon.svg';
-import { useStyles } from '../../styles';
+import { useStyles } from '../../themes';
 
 const pages = ['Page1', 'Page2', 'Page3', 'Page4'];
 const settings = ['Setting1', 'Setting2', 'Setting3', 'Setting4'];
@@ -151,7 +151,7 @@ export const Navbar = () => {
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, display: 'block' }}
                             >
                                 {page}
                             </Button>
