@@ -8,6 +8,7 @@ import {
 import { useState } from 'react';
 
 import { DarkTheme, LightTheme, Theme, ThemeSwitcher } from '@ecoside/ui';
+import { Navbar } from '../components';
 
 export const App = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));
@@ -15,6 +16,7 @@ export const App = () => {
     return (
         <ThemeProvider theme={theme === Theme.LIGHT ? LightTheme : DarkTheme}>
             <CssBaseline />
+            <Navbar></Navbar>
             <Stack spacing={2} direction='row'>
                 <Button variant='text'>Text</Button>
                 <Button variant='contained'>Contained</Button>
