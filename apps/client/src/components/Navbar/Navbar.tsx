@@ -144,6 +144,7 @@ export const Navbar = () => {
                         sx={{
                             flexGrow: 1,
                             display: { xs: 'none', md: 'flex' },
+                            paddingLeft: { xs: '0', md: '70px' },
                         }}
                     >
                         {pages.map((page) => (
