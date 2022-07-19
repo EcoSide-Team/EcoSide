@@ -46,7 +46,14 @@ export const Navbar = () => {
 
     return (
         <AppBar position='static'>
-            <Container maxWidth='xl'>
+            <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    paddingLeft: { xs: '0', md: '40px' },
+                    paddingRight: { xs: '10px', md: '30px' },
+                }}
+            >
                 <Toolbar disableGutters>
                     <Typography
                         variant='h6'
@@ -54,16 +61,15 @@ export const Navbar = () => {
                         component='a'
                         href='/'
                         sx={{
-                            mr: 2,
+                            mr: 1,
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        EcoSide
                     </Typography>
 
                     <Box
@@ -128,7 +134,6 @@ export const Navbar = () => {
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '-.13rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
